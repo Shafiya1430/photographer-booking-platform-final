@@ -1,7 +1,7 @@
 """
 AWS Integration Module for LumiLens
 This file contains AWS service integrations using boto3
-Includes: DynamoDB, SNS, and IAM configurations
+Includes: DynamoDB, and IAM configurations
 """
 
 import boto3
@@ -180,10 +180,6 @@ def setup_aws_infrastructure():
     create_photographers_table()
     create_bookings_table()
     
-    # Create SNS topic
-    print("\n2. Creating SNS topic...")
-    topic_arn = create_sns_topic()
-    
     # Create IAM role
     print("\n3. Creating IAM role...")
     role = create_ec2_role()
@@ -192,8 +188,6 @@ def setup_aws_infrastructure():
         attach_sns_policy_to_role('LumiLens_EC2_Role')
     
     print("\nAWS infrastructure setup complete!")
-    print(f"SNS Topic ARN: {topic_arn}")
-    
     return {
         'topic_arn': topic_arn,
         'role': role
